@@ -1,3 +1,5 @@
+v 1.2.0
+
 # How to use
 
 for getting Proxy for country by iso code just get it (for US example):
