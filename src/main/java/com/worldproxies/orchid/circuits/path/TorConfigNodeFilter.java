@@ -3,6 +3,8 @@ package com.worldproxies.orchid.circuits.path;
 import com.worldproxies.orchid.Router;
 import com.worldproxies.orchid.TorClientConfig;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,8 +41,21 @@ public class TorConfigNodeFilter {
 	List<Router> filterExitCandidates(List<Router> candidates) {
         final List<Router> filtered = new ArrayList<Router>();
 		for(Router r: candidates) {
-            if(isExitNodeIncluded(r) && !r.getNickname().contains("tor")) {
-                filtered.add(r);
+            if(isExitNodeIncluded(r)) {
+                InetAddress addr = null;
+                boolean flag = false;
+                try {
+                    addr = InetAddress.getByName(r.getAddress().toString());
+                    if (!addr.getHostName().contains("tor")) {
+                        flag = true;
+                    }
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
+                    System.out.println("hostname::" + addr.getHostName() + " flag::" + flag);
+                if (flag) {
+                    filtered.add(r);
+                }
 			}
 		}
         return filtered;
