@@ -39,7 +39,7 @@ public class TorConfigNodeFilter {
 	List<Router> filterExitCandidates(List<Router> candidates) {
         final List<Router> filtered = new ArrayList<Router>();
 		for(Router r: candidates) {
-            if(isExitNodeIncluded(r)) {
+            if(isExitNodeIncluded(r) && !r.getNickname().contains("tor")) {
                 filtered.add(r);
 			}
 		}
