@@ -12,6 +12,7 @@ public class MainTest {
         InetAddress addr = InetAddress.getByName("204.85.191.30");
         String host = addr.getHostName();
         System.out.println(host);
+        System.out.println(IsoProxyFactory.getIsoPorts());
     }
 
 }
